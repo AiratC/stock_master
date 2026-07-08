@@ -1,0 +1,123 @@
+.registerContainer {
+   display: flex;
+   min-height: 100vh;
+   background-color: #fff;
+}
+
+.illustration {
+   display: none;
+   flex: 1;
+   background-color: #f7f8fa;
+   background-image: url('./../../assets/auth-image.webp');
+   background-size: cover;
+}
+
+.formWrapper {
+   flex: 1.2;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 15px;
+   flex-direction: column;
+}
+
+.contentInner {
+   width: 100%;
+   max-width: 440px;
+}
+
+h2 {
+   font-size: 32px;
+   color: #1a1c21;
+   margin-bottom: 12px;
+}
+
+.subTitle {
+   color: #000000;
+   margin-bottom: 32px;
+   font-weight: bold;
+   font-size: 25px;
+   text-align: center;
+}
+
+.registerForm {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+/* Стили полей ввода */
+.registerForm input {
+   width: 100%;
+   padding: 14px 16px;
+   background: #f9f7f7;
+   border: 2px solid #000000;
+   border-radius: 12px;
+   font-size: 15px;
+}
+
+.inputGroup {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 14px;
+}
+
+.checkbox {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   width: 100%;
+}
+
+.checkbox input {
+   width: 20px;
+   padding: 10px;
+   margin-bottom: 0;
+}
+
+/* Кнопка */
+.signUpBtn {
+   width: max-content;
+   padding: 16px;
+   background: #101540;
+   color: #fff;
+   font-size: 16px;
+   border-radius: 16px;
+   font-weight: 600;
+   border: none;
+   cursor: pointer;
+}
+
+/* Адаптив для десктопа */
+@media (min-width: 992px) {
+   .illustration {
+      display: block;
+   }
+
+
+}
+
+@media (max-width: 992px) {
+   .formWrapper {
+      background-image: url(/src/assets/auth-image.webp);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+   }
+}
+
+@media (max-width: 540px) {
+   .inputGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+   }
+
+   .registerForm {
+      gap: 18px;
+   }
+
+   .signUpBtn {
+      margin-top: 20px;
+   }
+}
