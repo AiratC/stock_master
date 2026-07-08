@@ -1,0 +1,127 @@
+.loginContainer {
+   display: flex;
+   min-height: 100vh;
+}
+
+.formWrapper {
+   flex: 1;
+   /* Форма занимает меньше места */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 15px;
+}
+
+.contentInner {
+   width: 100%;
+   max-width: 400px;
+}
+
+.contentInner p {
+   text-align: center;
+}
+
+.illustration {
+   display: none;
+   /* Скрыто на мобильных */
+   flex: 1.5;
+   background-image: url('../../assets/auth-image.webp');
+   background-size: cover;
+   background-position: center;
+}
+
+/* Кнопка Google */
+.googleBtn {
+   width: 100%;
+   padding: 14px;
+   border: 1px solid #ddd;
+   background: white;
+   border-radius: 12px;
+   margin-bottom: 24px;
+   margin-top: 25px;
+   cursor: pointer;
+}
+
+/* Поля ввода */
+.inputField {
+   margin-bottom: 16px;
+}
+
+.inputField label {
+   display: block;
+   margin-bottom: 8px;
+   font-weight: 500;
+}
+
+.inputField input {
+   width: 100%;
+   padding: 14px 16px;
+   background: #f9f7f7;
+   border: 2px solid #000000;
+   border-radius: 12px;
+   font-size: 15px;
+}
+
+.checkbox {
+   display: flex;
+   align-items: center;
+   gap: 7px;
+}
+
+.formOptions {
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 24px;
+   font-size: 14px;
+}
+
+.loginBtn {
+   width: 100%;
+   padding: 16px;
+   background: #101540;
+   color: #fff;
+   font-size: 16px;
+   border-radius: 16px;
+   font-weight: 600;
+   border: none;
+   cursor: pointer;
+   margin-bottom: 20px;
+}
+
+@media (min-width: 992px) {
+   .illustration {
+      display: block;
+   }
+}
+
+@media (max-width: 992px) {
+   .formWrapper {
+      /* Добавляем фон */
+      background-image: url('../../assets/auth-image.webp');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+
+      /* ВАЖНО: Добавляем темный слой поверх картинки, чтобы текст читался! */
+      position: relative;
+   }
+
+   /* Чтобы текст не сливался с картинкой, нужно добавить полупрозрачный слой */
+   .formWrapper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 50%);
+      /* 85% прозрачности белого фона */
+      z-index: 0;
+   }
+
+   /* Чтобы контент остался поверх слоя */
+   .contentInner {
+      position: relative;
+      z-index: 1;
+   }
+}
