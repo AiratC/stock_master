@@ -17,10 +17,6 @@
    max-width: 400px;
 }
 
-.contentInner p {
-   text-align: center;
-}
-
 .illustration {
    display: none;
    /* Скрыто на мобильных */
