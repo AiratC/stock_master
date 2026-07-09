@@ -1,5 +1,6 @@
 fastapi==0.139.0
 # Асинхронный веб сервер для Python
+# uvicorn main:app --reload
 uvicorn==0.51.0
 
 # DATABASE

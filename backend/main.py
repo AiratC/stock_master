@@ -5,6 +5,9 @@ import os
 from contextlib import asynccontextmanager
 from db import connect_pg
 
+# Импортируем роутеры
+from routes import auth_router
+
 # Загружаем переменные из .env
 load_dotenv()
 
@@ -27,8 +30,10 @@ app = FastAPI(lifespan=lifespan)
 """
 Браузер запрещает сайту frontend.com делать запросы к API на backend.com, если бэкенд явно не разрешил это.
 """
+frontend_url = os.environ.get("FRONTEND_URL", "http://localhost:5173")
+
 origins = [
-   os.environ.get("FRONTEND_URL")
+   frontend_url
 ]
 
 app.add_middleware(
@@ -41,3 +46,6 @@ app.add_middleware(
    allow_methods=["*"], 
    allow_headers=["*"], 
 )
+
+# Роутеры
+app.include_router(auth_router, prefix="/api")

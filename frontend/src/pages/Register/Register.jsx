@@ -74,7 +74,7 @@ const Register = () => {
               type="password"
               name="password"
               value={formData.password}
-              placeholder='Введите пароль'
+              placeholder="Минимум 8 символов"
               onChange={handleChangeFormData}
             />
           </div>
