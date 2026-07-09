@@ -1,0 +1,16 @@
+fastapi==0.139.0
+# Асинхронный веб сервер для Python
+uvicorn==0.51.0
+
+# DATABASE
+# высокопроизводительный асинхронный драйвер базы данных, разработанный специально для связки Python и PostgreSQL
+asyncpg==0.31.0
+# psycopg2-binary нужна для быстрой установки драйвера psycopg2 — это адаптер базы данных PostgreSQL для Python
+psycopg2-binary==2.9.12
+# инструмент для миграции баз данных на Python
+alembic==1.18.5 # аналог node-pg-migrate
+
+pyjwt==2.13.0
+bcrypt==5.0.0
+
+python-dotenv==1.2.2
