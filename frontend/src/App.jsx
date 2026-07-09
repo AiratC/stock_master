@@ -1,11 +1,10 @@
-import Login from "./pages/Login/Login"
-import Register from "./pages/Register/Register"
+import { RouterProvider } from "react-router"
+import { router } from "./route"
 
 function App() {
   return (
     <>
-      <Login/>
-      {/* <Register/> */}
+      <RouterProvider router={router} />
     </>
   )
 }

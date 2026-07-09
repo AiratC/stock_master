@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from './Login.module.css'
+import { Link } from 'react-router';
 
 const Login = () => {
    const [formData, setFormData] = useState({
@@ -70,7 +71,7 @@ const Login = () => {
                </form>
 
                <p className={styles.footerLink}>
-                  Ещё нет аккаунта? <a href="/register">Создать аккаунт</a>
+                  Ещё нет аккаунта? <a href="/register"><Link to={`/register`}>Создать аккаунт</Link></a>
                </p>
             </div>
          </div>
