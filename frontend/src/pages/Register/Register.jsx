@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import styles from './Register.module.css'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
+import { useRegisterMutation } from '../../store/services/authApi';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,14 +14,53 @@ const Register = () => {
     isAgree: false
   });
 
+  const navigate = useNavigate();
+
+  const [register, { isLoading }] = useRegisterMutation();
+
   const handleChangeFormData = (e) => {
     setFormData((currentFormData) => {
       return { ...currentFormData, [e.target.name]: e.target.value }
     })
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const { firstName, lastName, email, phone, password, isAgree } = formData;
+
+    if (!firstName.trim() || !lastName.trim() || !email.trim() || !phone.trim() || !password.trim()) {
+      return toast.error('Заполните все поля')
+    };
+
+    if (password.length < 8) {
+      return toast.error('Пароль должен быть не меньше 8 символов')
+    }
+
+    if (!isAgree) {
+      return toast.error('Подтвердите согласие')
+    }
+
+    try {
+      const body = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        password: formData.password,
+        is_agree: formData.isAgree
+      };
+
+      const response = await register(body).unwrap();
+      console.log(response)
+      if (response.data.success) {
+        toast.success(response.data.message);
+        navigate('/login')
+      }
+    } catch (error) {
+      const message = error?.data?.message || 'Что-то пошло не так';
+      toast.error(message);
+    }
+
   }
 
 
@@ -61,7 +102,7 @@ const Register = () => {
               onChange={handleChangeFormData}
             />
             <input
-              type="phone"
+              type="tel"
               name='phone'
               value={formData.phone}
               placeholder='+7 900 758 6782'
@@ -84,12 +125,12 @@ const Register = () => {
               type="checkbox"
               name='isAgree'
               checked={formData.isAgree}
-              onChange={(e) => setFormData({...formData, isAgree: e.target.checked})}
+              onChange={(e) => setFormData({ ...formData, isAgree: e.target.checked })}
             />
             <span>Я согласен со всеми условиями, политикой конфиденциальности и тарифами.</span>
           </label>
 
-          <button className={styles.signUpBtn} type="submit">
+          <button disabled={isLoading} className={styles.signUpBtn} type="submit">
             Зарегистрироваться
           </button>
 
