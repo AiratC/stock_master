@@ -82,7 +82,7 @@ const CreateEmployee = () => {
 
       {/* Правая сторона */}
       <div className={`${styles.formWrapper}`}>
-        <h2>Регистрация</h2>
+        <h2>Создание нового сотрудника</h2>
         <p className={`${styles.subTitle}`}>Эффективно управляйте всеми своими запасами.</p>
 
         <button onClick={addMockData}>Add Mock Data</button>
