@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import styles from './Register.module.css'
-import { Link, useNavigate } from 'react-router';
+import styles from './CreateEmployee.module.css'
+import { useNavigate } from 'react-router';
 import toast from 'react-hot-toast';
-import { useRegisterMutation } from '../../store/services/authApi';
+import { useCreateEmployeeMutation } from '../../store/services/authApi';
 
-const Register = () => {
+const CreateEmployee = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -16,7 +16,7 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const [register, { isLoading }] = useRegisterMutation();
+  const [createEmployee, { isLoading }] = useCreateEmployeeMutation();
 
   const handleChangeFormData = (e) => {
     setFormData((currentFormData) => {
@@ -50,11 +50,10 @@ const Register = () => {
         is_agree: formData.isAgree
       };
 
-      const response = await register(body).unwrap();
-      console.log(response)
-      if (response.data.success) {
-        toast.success(response.data.message);
-        navigate('/login')
+      const response = await createEmployee(body).unwrap();
+      if (response.success) {
+        toast.success(response.message);
+        navigate('/dashboard')
       }
     } catch (error) {
       const message = error?.data?.message || 'Что-то пошло не так';
@@ -63,9 +62,20 @@ const Register = () => {
 
   }
 
+  const addMockData = () => {
+    setFormData({
+      firstName: "Eliot",
+      lastName: "Alderson",
+      email: "eliot@gmail.com",
+      phone: "+7900890889",
+      password: "12345678",
+      isAgree: true
+    })
+  }
+
 
   return (
-    <div className={`${styles.registerContainer}`}>
+    <div className={`${styles.createEmployeeContainer}`}>
       {/* Левая сторона */}
       <div className={styles.illustration}>
       </div>
@@ -75,7 +85,8 @@ const Register = () => {
         <h2>Регистрация</h2>
         <p className={`${styles.subTitle}`}>Эффективно управляйте всеми своими запасами.</p>
 
-        <form onSubmit={handleFormSubmit} className={`${styles.registerForm}`}>
+        <button onClick={addMockData}>Add Mock Data</button>
+        <form onSubmit={handleFormSubmit} className={`${styles.createEmployeeForm}`}>
           <div className={styles.inputGroup}>
             <input
               type="text"
@@ -134,13 +145,10 @@ const Register = () => {
             Зарегистрироваться
           </button>
 
-          <p>
-            Уже есть аккаунт? <Link to={`/login`}>Войти</Link>
-          </p>
         </form>
       </div>
     </div>
   )
 }
 
-export default Register
+export default CreateEmployee

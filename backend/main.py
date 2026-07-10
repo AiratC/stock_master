@@ -7,6 +7,7 @@ from db import connect_pg
 
 # Импортируем роутеры
 from routes import auth_router
+print(auth_router)
 
 # Загружаем переменные из .env
 load_dotenv()
@@ -31,6 +32,7 @@ app = FastAPI(lifespan=lifespan)
 Браузер запрещает сайту frontend.com делать запросы к API на backend.com, если бэкенд явно не разрешил это.
 """
 frontend_url = os.environ.get("FRONTEND_URL", "http://localhost:5173")
+print(frontend_url)
 
 origins = [
    frontend_url

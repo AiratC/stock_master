@@ -1,4 +1,4 @@
-.registerContainer {
+.createEmployeeContainer {
    display: flex;
    min-height: 100vh;
    background-color: #fff;
@@ -40,14 +40,14 @@ h2 {
    text-align: center;
 }
 
-.registerForm {
+.createEmployeeForm {
    display: flex;
    flex-direction: column;
    gap: 20px;
 }
 
 /* Стили полей ввода */
-.registerForm input {
+.createEmployeeForm input {
    width: 100%;
    padding: 14px 16px;
    background: #f9f7f7;
@@ -113,7 +113,7 @@ h2 {
       gap: 18px;
    }
 
-   .registerForm {
+   .createEmployeeForm {
       gap: 18px;
    }
 

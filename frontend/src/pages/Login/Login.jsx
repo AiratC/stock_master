@@ -64,15 +64,12 @@ const Login = () => {
                         />
                         Запомнить меня
                      </label>
-                     <a href="/forgot-password">Забыли пароль?</a>
+                     <Link to="/forgot-password">Забыли пароль?</Link>
                   </div>
 
                   <button type="submit" className={styles.loginBtn}>Войти</button>
                </form>
 
-               <p className={styles.footerLink}>
-                  Ещё нет аккаунта? <a href="/register"><Link to={`/register`}>Создать аккаунт</Link></a>
-               </p>
             </div>
          </div>
 

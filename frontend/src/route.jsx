@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import PublicLayout from "./routes/PublicLayout";
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+import CreateEmployee from "./pages/CreateEmployee/CreateEmployee";
 
 
 export const router = createBrowserRouter([
@@ -14,8 +14,8 @@ export const router = createBrowserRouter([
             element: <Login/>
          },
          {
-            path: '/register',
-            element: <Register/>
+            path: '/create-employee',
+            element: <CreateEmployee/>
          }
       ]
    }

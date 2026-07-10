@@ -3,10 +3,10 @@ import { apiSlice } from "../api/apiSlice";
 
 export const authApi = apiSlice.injectEndpoints({
    endpoints: (builder) => ({
-      // Регистрация
-      register: builder.mutation({
+      // Создание сотрудника
+      createEmployee: builder.mutation({
          query: (userData) => ({
-            url: '/register',
+            url: '/auth/create-employee',
             method: 'POST',
             body: userData
          })
@@ -15,5 +15,5 @@ export const authApi = apiSlice.injectEndpoints({
 })
 
 export const {
-   useRegisterMutation
+   useCreateEmployeeMutation
 } = authApi;

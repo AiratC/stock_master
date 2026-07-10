@@ -1,7 +1,7 @@
 # Здесь мы опишем, как должен выглядеть объект регистрации
 from pydantic import BaseModel, EmailStr, Field
 
-class UserRegister(BaseModel):
+class CreateEmployee(BaseModel):
    # EmailStr автоматически проверит, что это валидный email
    email: EmailStr
    # Field позволяет задать правила (например, минимум 8 символов)
@@ -16,3 +16,5 @@ class UserRegister(BaseModel):
    
    # Согласие: обязательно True
    is_agree: bool = Field(..., eq=True)
+   
+   role_id: int = Field(..., ge=1, le=2)
