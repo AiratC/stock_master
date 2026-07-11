@@ -33,14 +33,12 @@ async def create_employee_user_controller(db, user_data):
 
 
 async def login(user_data, db, response: Response):
-    print(f"user_data: {user_data}")
     email_lower = user_data.email.lower()
     rememberMe = user_data.rememberMe
     password = user_data.password
 
     # Меняем имя переменной на user_record
     user_record = await findUserByEmail(db, email_lower)
-    print(f"user_record: {user_record}")
 
     # Проверяем пароль и пользователя
     if not user_record or not verify_password(password, user_record["hash_password"]):
@@ -60,6 +58,10 @@ async def login(user_data, db, response: Response):
 
     # 5. Создание токена
     access_token = create_access_token(token_data, expires_delta=expires)
+    
+    # --- ДЕСТРУКТУРИЗАЦИЯ/ОЧИСТКА ---
+    # Создаем копию user_record без hash_password
+    user_response = { key: value for key, value in user_record.items() if key != "hash_password" }
 
     response.set_cookie(
         key="token",
@@ -70,4 +72,4 @@ async def login(user_data, db, response: Response):
         max_age=int(expires.total_seconds()),  # Указываем время жизни в секундах
     )
 
-    return {"success": True, "message": "Вход выполнен", "user": user_record}
+    return {"success": True, "message": "Вход выполнен", "user": user_response}
