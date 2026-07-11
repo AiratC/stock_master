@@ -5,6 +5,8 @@ import os
 from contextlib import asynccontextmanager
 from db import connect_pg
 
+from db import init_admin
+
 # Импортируем роутеры
 from routes import auth_router
 print(auth_router)
@@ -20,6 +22,9 @@ load_dotenv()
 async def lifespan(app: FastAPI):
    await connect_pg.init_db()
    print("База данных успешно подключена (Пул создан)")
+   
+   # Запускаем создание админа сразу после инициализации пула БД
+   await init_admin.initAdminAccount()
    
    yield
    await connect_pg.close_db()

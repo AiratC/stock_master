@@ -26,5 +26,9 @@ async def create_user_and_get_data(db, data: dict):
     # fetchrow возвращает целую строку (а не одно значение)
     user_row = await db.fetchrow(select_query, user_id)
     
+    # Если вдруг запись не нашлась, это ошибка системы
+    if not user_row:
+        raise ValueError("Ошибка при создании пользователя: запись не найдена")
+    
     # Превращаем в словарь (asyncpg позволяет это делать через dict())
     return dict(user_row)
