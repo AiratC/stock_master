@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import styles from './Login.module.css'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
+import { useLoginMutation } from '../../store/services/authApi';
 
 const Login = () => {
    const [formData, setFormData] = useState({
@@ -8,6 +10,9 @@ const Login = () => {
       password: "",
       rememberMe: false
    });
+   const navigate = useNavigate();
+
+   const [login, { isLoading }] = useLoginMutation();
 
    const handleChange = (e) => {
       const { name, value, type, checked } = e.target;
@@ -17,8 +22,30 @@ const Login = () => {
       }));
    };
 
-   const handleFormSubmit = (e) => {
+   const handleFormSubmit = async (e) => {
       e.preventDefault();
+      const { email, password } = formData;
+      if (!email.trim() || !password.trim()) {
+         return toast.error("Заполните все поля")
+      }
+
+      if (password.length < 8) {
+         return toast.error('Пароль должен быть не меньше 8 символов')
+      }
+
+      try {
+         const response = await login(formData).unwrap();
+         console.log(response);
+         if (response?.success) {
+            toast.success(response.message);
+            navigate('/dashboard')
+         }
+      } catch (error) {
+         console.log(error);
+         // Берем сообщение из ответа сервера, если оно есть, иначе дефолтная фраза
+         const message = error?.data?.message || "Ошибка входа, попробуйте позже";
+         toast.error(message);
+      }
    }
 
    return (
@@ -67,7 +94,7 @@ const Login = () => {
                      <Link to="/forgot-password">Забыли пароль?</Link>
                   </div>
 
-                  <button type="submit" className={styles.loginBtn}>Войти</button>
+                  <button disabled={isLoading} type="submit" className={styles.loginBtn}>Войти</button>
                </form>
 
             </div>

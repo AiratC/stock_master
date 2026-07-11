@@ -10,10 +10,20 @@ export const authApi = apiSlice.injectEndpoints({
             method: 'POST',
             body: userData
          })
-      })
+      }),
+      // Вход
+      login: builder.mutation({
+         query: (credentials) => ({
+            url: '/auth/login',
+            method: 'POST',
+            body: credentials,
+         }),
+         invalidatesTags: ['User'], // Сбрасываем кэш юзера при входе
+      }),
    })
 })
 
 export const {
-   useCreateEmployeeMutation
+   useCreateEmployeeMutation,
+   useLoginMutation
 } = authApi;
