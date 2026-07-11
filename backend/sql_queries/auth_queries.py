@@ -1,4 +1,3 @@
-from sqlalchemy import text
 
 async def create_user_and_get_data(db, data: dict):
     # 1. Вставка (Используем $1, $2... — это синтаксис asyncpg)
@@ -32,3 +31,14 @@ async def create_user_and_get_data(db, data: dict):
     
     # Превращаем в словарь (asyncpg позволяет это делать через dict())
     return dict(user_row)
+
+async def findUserByEmail(db, email):
+    # Добавляем JOIN, чтобы получить role_name
+    select_query = """
+        SELECT u.*, r.name as role_name 
+        FROM users u 
+        JOIN roles r ON u.role_id = r.id 
+        WHERE u.email = $1
+    """
+    user_row = await db.fetchrow(select_query, email)
+    return dict(user_row) if user_row else None

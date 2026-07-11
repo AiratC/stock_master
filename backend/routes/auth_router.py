@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response
 from controllers import auth_controller
 from schemas import auth_schema
 from db.connect_pg import get_db
@@ -14,7 +14,9 @@ async def create_employee(user_data: auth_schema.CreateEmployee, db = Depends(ge
    return await auth_controller.create_employee_user_controller(db, user_data)
 
 # Вход
-
+@router.post('/login')
+async def login(user_data: auth_schema.Login, response: Response, db = Depends(get_db)):
+   return await auth_controller.login(user_data, db, response)
 
 # Выход
 

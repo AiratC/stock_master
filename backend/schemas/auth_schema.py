@@ -18,3 +18,10 @@ class CreateEmployee(BaseModel):
    is_agree: bool = Field(..., eq=True)
    
    role_id: int = Field(..., ge=1, le=2)
+   
+class Login(BaseModel):
+   # EmailStr автоматически проверит, что это валидный email
+   email: EmailStr
+   # Field позволяет задать правила (например, минимум 8 символов)
+   password: str = Field(..., min_length=8)
+   rememberMe: bool
