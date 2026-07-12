@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import PublicLayout from "./routes/PublicLayout";
 import Login from "./pages/Login/Login";
 import CreateEmployee from "./pages/CreateEmployee/CreateEmployee";
+import MainLayout from "./Layout/MainLayout/MainLayout";
 
 
 export const router = createBrowserRouter([
@@ -18,10 +19,11 @@ export const router = createBrowserRouter([
             element: <CreateEmployee/>
          }
       ]
-   }
+   },
 
    // Приватная зона CRM (Защищенная от гостей)
-   // {
-   //    element:
-   // }
+   {
+      path: '/',
+      element: <MainLayout/>
+   }
 ])
